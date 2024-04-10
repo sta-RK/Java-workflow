@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'  # Change to the desired JDK version
+          distribution: 'adopt'  # Specify the distribution
 
       - name: Compile Java Code
         run: javac HelloWorld.java  # Replace 'HelloWorld.java' with the name of your Java source file
