@@ -20,7 +20,7 @@ jobs:
           distribution: 'adopt'  # Specify the distribution
 
       - name: Compile Java Code
-        run: javac HelloWorld.java  # Replace 'HelloWorld.java' with the name of your Java source file
+        run: javac demo.java  # Replace 'HelloWorld.java' with the name of your Java source file
 
       - name: Run Java Program
-        run: java HelloWorld  # Replace 'HelloWorld' with the name of your main Java class
+        run: java demo  # Replace 'HelloWorld' with the name of your main Java class
