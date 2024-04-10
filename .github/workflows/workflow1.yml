@@ -24,3 +24,13 @@ jobs:
 
       - name: Run Java Program
         run: java demo  
+      
+      - name: Run Java Program and Check Output
+        run: |
+          output=$(java HelloWorld)
+          if [[ "$output" == *"Hello, World!"* ]]; then
+            echo "Output verification: PASSED"
+          else
+            echo "Output verification: FAILED"
+            exit 1
+          fi
