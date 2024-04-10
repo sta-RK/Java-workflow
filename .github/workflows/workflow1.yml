@@ -1,0 +1,25 @@
+name: Java Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'  # Change to the desired JDK version
+
+      - name: Compile Java Code
+        run: javac HelloWorld.java  # Replace 'HelloWorld.java' with the name of your Java source file
+
+      - name: Run Java Program
+        run: java HelloWorld  # Replace 'HelloWorld' with the name of your main Java class
