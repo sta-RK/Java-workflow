@@ -1,4 +1,4 @@
-name: Java Workflow
+name: Compare Outputs
 
 on:
   push:
@@ -6,31 +6,30 @@ on:
       - main
 
 jobs:
-  build:
+  compare_outputs:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'  # Change to the desired JDK version
-          distribution: 'adopt'  # Specify the distribution
-
-      - name: Compile Java Code
-        run: javac demo.java 
-
-      - name: Run Java Program
-        run: java demo  
-      
-      - name: Run Java Program and Check Output
+      - name: Compile and Run file1
         run: |
-          output=$(java demo)
-          if [[ "$output" == *"HelloWorld"* ]]; then
-            echo "Output verification: PASSED"
+          javac file1.java
+          output1=$(java file1)
+          echo "::set-output name=output1::$output1"
+
+      - name: Compile and Run file2
+        run: |
+          javac file2.java
+          output2=$(java file2)
+          echo "::set-output name=output2::$output2"
+
+      - name: Compare Outputs
+        run: |
+          if [ "${{ steps.compile_and_run_file1.outputs.output1 }}" == "${{ steps.compile_and_run_file2.outputs.output2 }}" ]; then
+            echo "Outputs are the same."
           else
-            echo "Output verification: FAILED"
+            echo "Outputs are different."
             exit 1
           fi
